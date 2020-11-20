@@ -24,13 +24,13 @@ const companyController = {
     }
   },
   update: async (req, res) => {
-    const { name, value } = req.body;
+    const { target, name } = req.body;
 
-    let updatedCompany = await Company.findOneAndUpdate(
+    const updatedCompany = await Company.findOneAndUpdate(
       {
-        name: name,
+        name: target,
       },
-      { $set: { name: value } },
+      { $set: { name } },
       {
         new: true,
       }

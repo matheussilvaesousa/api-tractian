@@ -50,6 +50,45 @@ const assetController = {
       res.status(400).send(error);
     }
   },
+  update: async (req, res) => {
+    const { target, name, image, model, description } = req.body;
+
+    const unit = await Unit.findOne({
+      name: req.body.unit,
+    })._id;
+
+    const user = await User.findOne({
+      name: req.body.user,
+    })._id;
+
+    const updatedAsset = await Asset.findOneAndUpdate(
+      {
+        name: target,
+      },
+      {
+        $set: {
+          name,
+          unit,
+          image,
+          model,
+          description,
+          user,
+        },
+      },
+      {
+        new: true,
+      }
+    );
+    res.json(updatedAsset);
+  },
+  delete: async (req, res) => {
+    const { name } = req.body;
+
+    let deletedAsset = await Asset.findOneAndDelete({
+      name,
+    });
+    res.json(deletedAsset);
+  },
 };
 
 module.exports = assetController;

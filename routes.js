@@ -31,5 +31,7 @@ router.post("/units", unitController.create);
 router.get("/assets", assetController.index);
 router.get("/assets", assetController.find);
 router.post("/assets", assetController.create);
+router.patch("/assets", assetController.update);
+router.delete("/assets", assetController.delete);
 
 module.exports = router;
